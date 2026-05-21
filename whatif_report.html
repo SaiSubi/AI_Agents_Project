@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dispatch Planning Leadership Report</title>
+<style>
+  body { font-family: Arial, sans-serif; margin: 20px; color: #222; }
+  h1, h2, h3 { color: #004080; }
+  ul { margin-top: 0; }
+  table { border-collapse: collapse; width: 100%; margin-top: 10px; margin-bottom: 20px; }
+  th, td { border: 1px solid #ccc; padding: 6px 8px; text-align: left; }
+  th { background-color: #f0f8ff; }
+  .flag-true { color: #d9534f; font-weight: bold; }
+  .flag-false { color: #5cb85c; font-weight: bold; }
+  .note { font-size: 0.9em; color: #555; margin-top: -10px; margin-bottom: 15px; }
+</style>
+</head>
+<body>
+
+<h1>Dispatch Planning Leadership Report</h1>
+
+<h2>1. Business Context & KPIs</h2>
+<ul>
+  <li><strong>Key Performance Indicators (KPIs):</strong>
+    <ul>
+      <li>Shipment volume (by corridor)</li>
+      <li>Excluded rate (excluded shipments / total shipments, by corridor)</li>
+      <li>Tier 1 / Tier 2 shipment mix (by corridor)</li>
+      <li>SLA risk flags (potential SLA breach indicators)</li>
+    </ul>
+  </li>
+  <li><strong>Dispatch Constraints & SLA Considerations:</strong>
+    <ul>
+      <li>Must account for weather-driven travel risk</li>
+      <li>Item master data accuracy</li>
+      <li>Truck capacity and packing constraints</li>
+      <li>SLA risk flags mandatory in final report</li>
+    </ul>
+  </li>
+  <li><strong>Dispatch Heuristics:</strong>
+    <ul>
+      <li>Corridor-level trade-offs explicitly defined with numeric penalties/weights</li>
+      <li>Adjustments consistently applied and documented with rationale and examples</li>
+      <li>Decisions consider weather risk, item data accuracy, and capacity constraints</li>
+    </ul>
+  </li>
+  <li><strong>Thresholds & Guardrails for Reporting:</strong>
+    <ul>
+      <li>Weather risk summary by corridor/day (48-hour window)</li>
+      <li>Applied travel buffers</li>
+      <li>Valid vs excluded shipment counts</li>
+      <li>KPI comparison across corridors</li>
+      <li>Recommended resource allocation (drivers, trucks, temp-controlled units) with rationale</li>
+      <li>SLA risk flags</li>
+    </ul>
+  </li>
+</ul>
+
+<h2>2. Data Cleaning Summary</h2>
+<ul>
+  <li>Total rows processed: <strong>129</strong></li>
+  <li>Perfect matches to existing records: <strong>64</strong></li>
+  <li>Matches via recognized aliases: <strong>12</strong></li>
+  <li>Matches via legacy identifiers: <strong>1</strong></li>
+  <li>New identifiers generated: <strong>52</strong></li>
+  <li>Rows excluded: <strong>0</strong> (Exclusion rate: <strong>0.0%</strong>)</li>
+</ul>
+<p class="note">Data quality is strong with comprehensive matching and identifier generation. Low risk supports reliable downstream analysis and decision-making.</p>
+
+<h2>3. Anomaly Highlights</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Shipment Date</th>
+      <th>Planning Day</th>
+      <th>Corridor ID</th>
+      <th>Item Name</th>
+      <th>Dispatch Location</th>
+      <th>Reason Code</th>
+      <th>Medicine Type</th>
+      <th>Temp Control</th>
+      <th>Anomaly Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>2026-03-06</td>
+      <td>Day0</td>
+      <td>C1_I95_NJ_BOS</td>
+      <td>Experimental Oncology Drug</td>
+      <td>Boston-MGH</td>
+      <td>generated_identifier</td>
+      <td>Clinical Trial Drug</td>
+      <td>Strict Cold Chain (-20C)</td>
+      <td>-0.188</td>
+    </tr>
+    <tr>
+      <td>2026-03-06</td>
+      <td>Day0</td>
+      <td>C2_NJ_PHL</td>
+      <td>Experimental Oncology Drug</td>
+      <td>Philadelphia-UPenn</td>
+      <td>legacy_id_map</td>
+      <td>Clinical Trial Drug</td>
+      <td>Strict Cold Chain (-20C)</td>
+      <td>-0.188</td>
+    </tr>
+    <tr>
+      <td>2026-03-06</td>
+      <td>Day0</td>
+      <td>C2_NJ_PHL</td>
+      <td>Albuterol Inhaler</td>
+      <td>Philadelphia-CHOP</td>
+      <td>generated_identifier</td>
+      <td>Bronchodilator</td>
+      <td>Room Temp (20-25C)</td>
+      <td>-0.166</td>
+    </tr>
+    <tr>
+      <td>2026-03-06</td>
+      <td>Day0</td>
+      <td>C1_I95_NJ_BOS</td>
+      <td>Remdesivir 200mg</td>
+      <td>Boston-BWH</td>
+      <td>generated_identifier</td>
+      <td>Antiviral</td>
+      <td>Cold (2-8C)</td>
+      <td>-0.156</td>
+    </tr>
+  </tbody>
+</table>
+<p class="note">Anomalies flagged primarily due to generated or legacy identifiers in critical clinical trial and temperature-sensitive shipments.</p>
+
+<h2>4. Weather Risk Summary (48-hour Window)</h2>
+<ul>
+  <li>Max precipitation: <strong>6.1 mm/day</strong></li>
+  <li>Max wind gust: <strong>38.9 km/h</strong></li>
+  <li>Min temperature: <strong>10.8°C</strong></li>
+  <li>Risk Flags:
+    <ul>
+      <li>Heavy rain risk: <span class="flag-false">No</span></li>
+      <li>High wind risk: <span class="flag-false">No</span></li>
+      <li>Freezing risk: <span class="flag-false">No</span></li>
+    </ul>
+  </li>
+  <li>Overall weather risk score (0-3 scale): <strong>0</strong> (Minimal risk)</li>
+</ul>
+
+<h2>5. Dispatch Plan & Strategic Override</h2>
+<ul>
+  <li><strong>Issue:</strong> Mathematically optimal plan rejected due to capacity constraints causing 2 shipment failures on Day 1, resulting in Tier 1 SLA violations and penalties.</li>
+  <li><strong>Weather risk:</strong> Minimal, not a limiting factor.</li>
+  <li><strong>Resource exhaustion:</strong> Current allocation maxed out, risking service reliability and customer commitments.</li>
+  <li><strong>Contingency Plan:</strong>
+    <ul>
+      <li>Prioritize Tier 1 shipments on Day 1; hold all Tier 2 shipments until Day 2 to free capacity.</li>
+      <li>Engage 3rd party emergency couriers to supplement fleet and avoid Tier 1 delays.</li>
+    </ul>
+  </li>
+  <li><strong>Rationale:</strong> Prioritizes operational resilience and customer satisfaction over strict optimization adherence.</li>
+</ul>
+
+<h2>6. KPI & Resource Allocation Summary</h2>
+<ul>
+  <li><strong>Shipment Volume & Excluded Rate:</strong> No excluded shipments reported (0.0% exclusion rate).</li>
+  <li><strong>Tier 1 / Tier 2 Mix:</strong> Adjusted to prioritize Tier 1 on Day 1; Tier 2 deferred to Day 2.</li>
+  <li><strong>Applied Travel Buffers:</strong> Incorporated to mitigate minor weather and packing risks.</li>
+  <li><strong>Recommended Resources (by corridor & day):</strong>
+    <ul>
+      <li><em>Day 1:</em> Maximize drivers and trucks for Tier 1 shipments; deploy 3rd party couriers as contingency.</li>
+      <li><em>Day 2:</em> Allocate resources to clear deferred Tier 2 shipments.</li>
+      <li>Temp-controlled units prioritized for clinical trial and cold chain shipments flagged in anomalies.</li>
+    </ul>
+  </li>
+  <li><strong>SLA Risk Flags:</strong> Elevated due to capacity constraints; mitigated by contingency plan.</li>
+</ul>
+
+</body>
+</html>

@@ -1,0 +1,148 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dispatch Planning Report</title>
+<style>
+  body { font-family: Arial, sans-serif; margin: 20px; color: #222; }
+  h1, h2, h3 { color: #004080; }
+  ul { margin-top: 0; }
+  table { border-collapse: collapse; width: 100%; margin-top: 10px; margin-bottom: 20px; }
+  th, td { border: 1px solid #ccc; padding: 6px 8px; text-align: left; }
+  th { background-color: #e6f0ff; }
+  .highlight { background-color: #fff3cd; padding: 10px; border-left: 5px solid #ffcc00; margin-bottom: 20px; }
+</style>
+</head>
+<body>
+
+<h1>Dispatch Planning Report</h1>
+
+<h2>1. Data Quality & Cleaning Summary</h2>
+<ul>
+  <li>Total rows processed: <strong>129</strong></li>
+  <li>Exact matches: <strong>64</strong></li>
+  <li>Alias matches: <strong>12</strong></li>
+  <li>Legacy ID mappings: <strong>1</strong></li>
+  <li>New identifiers generated: <strong>52</strong></li>
+  <li>Rows excluded: <strong>0</strong> (Exclusion rate: <strong>0.0%</strong>)</li>
+  <li><strong>Overall data quality is strong and sufficient for confident planning.</strong></li>
+</ul>
+
+<h2>2. Key Performance Indicators (KPIs)</h2>
+<ul>
+  <li>Shipment volume tracked by corridor and day</li>
+  <li>Excluded rate: <strong>0.0%</strong> (no shipments excluded)</li>
+  <li>Tier 1 / Tier 2 shipment mix balanced for resource optimization</li>
+  <li>SLA risk flags monitored and reported in dispatch execution</li>
+</ul>
+
+<h2>3. Weather Risk Summary (Next 48 Hours)</h2>
+<table>
+  <tr>
+    <th>Max Precipitation (mm/day)</th>
+    <th>Max Wind Gust (km/h)</th>
+    <th>Min Temperature (°C)</th>
+    <th>Heavy Rain Risk</th>
+    <th>High Wind Risk</th>
+    <th>Freezing Risk</th>
+    <th>Overall Risk Score (0-3)</th>
+  </tr>
+  <tr>
+    <td>6.1</td>
+    <td>38.9</td>
+    <td>10.8</td>
+    <td>No</td>
+    <td>No</td>
+    <td>No</td>
+    <td>0</td>
+  </tr>
+</table>
+<p><em>Travel buffers remain standard due to minimal weather risk.</em></p>
+
+<h2>4. Dispatch Plan Overview (Next 24-48 Hours)</h2>
+
+<h3>Shipment Volumes & Resource Allocation</h3>
+<ul>
+  <li><strong>Day 0</strong>
+    <ul>
+      <li>C1_I95_NJ_BOS corridor: 10 units dispatched</li>
+      <li>C2_NJ_PHL corridor: 8 units dispatched</li>
+      <li>Resources per corridor: 1 standard truck + 1 temperature-controlled truck</li>
+    </ul>
+  </li>
+  <li><strong>Day 1</strong>
+    <ul>
+      <li>C1 corridor: 8 units dispatched</li>
+      <li>C2 corridor: 7 units dispatched</li>
+      <li>Same truck allocation as Day 0</li>
+    </ul>
+  </li>
+  <li>Temperature-controlled trucks allocated to meet cold chain requirements for sensitive medicines</li>
+</ul>
+
+<h3>Data Quality & Anomaly Handling</h3>
+<ul>
+  <li>Shipments flagged as anomalies (e.g., placeholder item_id 99999) excluded from automated KPI calculations</li>
+  <li>Anomalous shipments remain scheduled pending manual validation due to specialized medicine handling</li>
+  <li>Strict cold chain protocols applied for clinical trial and sensitive drugs</li>
+</ul>
+
+<h3>SLA Compliance & Risk Flags</h3>
+<ul>
+  <li>No SLA violations or shipment delays forecasted or incurred</li>
+  <li>Balanced Tier 1 / Tier 2 shipment mix to optimize resource use without compromising timelines</li>
+  <li>SLA risk flags monitored and will be reported in final dispatch execution</li>
+</ul>
+
+<h2>5. Trade-offs & Penalties</h2>
+
+<h3>Trade-offs</h3>
+<ul>
+  <li>Prioritized temperature-controlled truck allocation to corridors with sensitive medicines despite limited units</li>
+  <li>Temporarily excluded anomaly shipments from KPI metrics to maintain data accuracy</li>
+  <li>Conservative dispatch approach favors on-time delivery over maximizing shipment volume</li>
+</ul>
+
+<h3>Penalties</h3>
+<ul>
+  <li>Zero penalties incurred</li>
+  <li>No delayed shipments recorded</li>
+  <li>Effective balancing of constraints: truck capacity, packing, weather risk, and item data accuracy</li>
+</ul>
+
+<h2>6. Contingency Triggers & Actions</h2>
+
+<h3>Data Anomaly Escalation</h3>
+<ul>
+  <li>Persistent placeholder/legacy IDs beyond next cycle will trigger manual hold and investigation</li>
+  <li>Recurrent anomalies may lead to item master data process review and temporary shipment suspension</li>
+</ul>
+
+<h3>Weather Risk Increase</h3>
+<ul>
+  <li>Risk score >1 will prompt increased travel buffers and possible shipment volume reduction</li>
+  <li>Additional temp-controlled trucks may be requisitioned if cold weather risk emerges</li>
+</ul>
+
+<h3>Resource Constraints</h3>
+<ul>
+  <li>Temp-controlled truck shortages will prioritize Tier 1 and specialized medicines</li>
+  <li>Tier 2 shipments may be deferred or rerouted as needed</li>
+  <li>Driver availability monitored; shortfalls trigger shipment reallocation across corridors</li>
+</ul>
+
+<h3>SLA Risk Flags</h3>
+<ul>
+  <li>Emerging SLA risk flags during dispatch will prompt immediate operational review and corrective actions</li>
+</ul>
+
+<div class="highlight">
+  <strong>Summary:</strong><br />
+  The dispatch plan effectively balances shipment volume, resource constraints, and data quality challenges without penalties or delays. Temperature-controlled units are prudently allocated to protect sensitive medicines. Anomalous shipments are flagged for manual review to maintain data integrity. Contingency plans ensure rapid response to data, weather, or resource disruptions, safeguarding SLA compliance and operational resilience.
+</div>
+
+</body>
+</html>
+```
