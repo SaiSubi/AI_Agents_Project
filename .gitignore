@@ -3,6 +3,8 @@
 
 # python
 .venv/
+.tmp_venv/
+venv/
 __pycache__/
 *.pyc
 
